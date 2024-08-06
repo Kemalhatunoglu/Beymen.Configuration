@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 
 services:
   mongodb:
@@ -6,15 +6,49 @@ services:
     container_name: mongodb
     ports:
       - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+    networks:
+      - config-network
+    environment:
+      - MONGO_INITDB_DATABASE=ConfigDB
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - config-network
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
 
   servicea:
-    build: ./ServiceA
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
     depends_on:
       - mongodb
+      - rabbitmq
+    networks:
+      - config-network
     environment:
       - MongoConnectionString=mongodb://mongodb:27017
+      - MongoDatabaseName=ConfigDB
+      - MongoCollectionName=Configurations
+      - RabbitMQConnectionString=amqp://guest:guest@rabbitmq:5672/
+      - ServiceName=SERVICE-A
+      - ConfigCheckIntervalSeconds=30
 
-volumes:
-  mongo-data:
+  beymen.configuration.test:
+    image: ${DOCKER_REGISTRY-}beymenconfigurationtest
+    build:
+      context: .
+      dockerfile: Beymen.Configuration.Test/Dockerfile
+
+networks:
+  config-network:
+    driver: bridge
+

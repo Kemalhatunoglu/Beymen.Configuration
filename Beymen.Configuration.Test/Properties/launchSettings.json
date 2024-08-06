@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Beymen.ServiceA": {
+    "Beymen.Configuration.Test": {
       "commandName": "Project"
     },
     "Docker": {
