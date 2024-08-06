@@ -112,11 +112,3 @@ app.Run();
 3. Değişikliklerinizi commit edin (`git commit -am 'Yeni bir özellik ekle'`).
 4. Branch'e push edin (`git push origin feature-isim`).
 5. Bir Pull Request açın.
-
-## Lisans
-
-Bu proje MIT lisansı ile lisanslanmıştır. Detaylar için LICENSE dosyasına bakabilirsiniz.
-
----
-
-Bu README.md dosyası, projenizin ne yaptığı, nasıl çalıştırıldığı ve nasıl kullanılacağı konusunda ayrıntılı bilgi sağlar. İlgili bağlantıları ve açıklamaları ihtiyaçlarınıza göre özelleştirebilirsiniz.
