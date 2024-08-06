@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Beymen.ServiceA": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
